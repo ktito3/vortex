@@ -131,6 +131,9 @@ public:
   }
 
   void attach_ram(RAM* ram) {
+    //Setting IOMMU/DMA and all cores to the same?????
+    uint32_t satp_pfn = ram->os_allocate_top_level_page_table();
+    ram->set_base_pfn(satp_pfn);
     for (auto core : cores_) {
       core->attach_ram(ram);
     }

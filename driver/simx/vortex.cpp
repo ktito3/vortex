@@ -95,8 +95,8 @@ public:
         uint64_t asize = aligned_size(size, CACHE_BLOCK_SIZE);
         if (dest_addr + asize > LOCAL_MEM_SIZE)
             return -1;
-
-        ram_.write((const uint8_t*)src + src_offset, dest_addr, asize);
+        std::cout<<"DMA write"<<std::endl;
+        ram_.dma_write((const uint8_t*)src + src_offset, dest_addr, asize);
         
         /*printf("VXDRV: upload %d bytes to 0x%x\n", size, dest_addr);
         for (int i = 0; i < size; i += 4) {
@@ -110,8 +110,8 @@ public:
         uint64_t asize = aligned_size(size, CACHE_BLOCK_SIZE);
         if (src_addr + asize > LOCAL_MEM_SIZE)
             return -1;
-
-        ram_.read((uint8_t*)dest + dest_offset, src_addr, asize);
+        std::cout<<"DMA read"<<std::endl;
+        ram_.dma_read((uint8_t*)dest + dest_offset, src_addr, asize);
         
         /*printf("VXDRV: download %d bytes from 0x%x\n", size, src_addr);
         for (int i = 0; i < size; i += 4) {
