@@ -406,7 +406,7 @@ void Core::icache_read(void *data, uint64_t addr, uint32_t size) {
 
 void Core::dcache_read(void *data, uint64_t addr, uint32_t size) {  
   auto type = get_addr_type(addr, size);
-  if (type == AddrType::Shared) {
+  if (type == AddrType::Shared) {std::cout<<"shared meory access"<<std::endl;
     addr &= (SMEM_SIZE-1);
     smem_.read(data, addr, size);
   } else {  
@@ -420,7 +420,7 @@ void Core::dcache_write(const void* data, uint64_t addr, uint32_t size) {
      this->writeToStdOut(data, addr, size);
   } else {
     auto type = get_addr_type(addr, size);
-    if (type == AddrType::Shared) {
+    if (type == AddrType::Shared) {std::cout<<"shared meory access"<<std::endl;
       addr &= (SMEM_SIZE-1);
       smem_.write(data, addr, size);
     } else {
